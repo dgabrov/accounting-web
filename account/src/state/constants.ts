@@ -1,0 +1,11 @@
+export const LOCATION_LOGIN : string = 'login';
+export const LOCATION_ACCOUNTS: string = 'accounts';
+export const LOCATION_CD_ACCOUNTS: string = 'cd_accounts';
+export const LOCATION_CD_COMPANIES: string = 'cd_companies';
+export const LOCATION_CD_TRANSACTIONS: string = 'cd_transactions';
+export const LOCATION_COMPANIES: string = 'companies';
+export const LOCATION_EDIT_ACCOUNT: string = 'edit_account';
+export const LOCATION_EDIT_COMPANY: string = 'edit_company';
+export const LOCATION_EDIT_TRANSACTION: string = 'edit_transaction';
+export const LOCATION_TRANSACTIONS: string = 'transactions';
+export const LOCATION_REPORTS: string = 'reports';

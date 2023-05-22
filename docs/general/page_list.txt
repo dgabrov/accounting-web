@@ -1,0 +1,38 @@
+This is the page list
+
+error message
+mechanism of removing it after some time or when clicked
+make a list with all the methods that are needed
+
+control done - header
+app tsx latest version
+control done - login
+control done - company list
+control done - add / edit company
+control done - confirm delete company
+control done - accounts
+control done - confirm delete accounts
+control done - add / edit account
+done - transactions (list)
+done - add / update transaction
+control done - confirm delete transaction
+- reports
+a) current transaction
+b) transaction list
+c) account card for a period
+d) trial balance
+- functionality: close income and expense accounts through given account
+that's it
+
+
+list
+
+
+done - the edit transaction to be done
+done - totals filled out in real time
+done - balance depending on where we push the button
+done - bigger length for the account - 100% with a minimum whatever pixels needed
+done - remove allow reset for the account
+done - totals aligned to right
+- date must be selected with date select not with edit field
+- save is not implemented

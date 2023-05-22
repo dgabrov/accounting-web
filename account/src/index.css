@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
+
+html {
+  min-height: 100%;
+  position: relative;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+div.message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 100%;
+  color: white;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.message > div {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: 50%;
+  min-height: 50px;
+  opacity: 100%;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+  border: #dedede solid 1px;
+  padding: 10px;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  font-weight: 800;
+  font-family: 'Work Sans', sans-serif;
+}
+
+header {
+  background: darkblue;
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.logo {
+  float: left;
+  padding: 8px;
+  margin: 0;
+  color: #ddd;
+}
+
+nav {
+  float: right;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 23px;
+
+  position: relative;
+  color: white;
+}
+
+nav a {
+  color: #ddd;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #fff;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 100ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
+.content {
+  width: 80%;
+  margin: auto;
+}
+
+.content .edit {
+  padding: 5px 0 0 0;
+}
+
+.edit input[type=text], .edit input[type=password] {
+  padding: 5px;
+  margin: 0;
+  border: 1px solid lightblue;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.edit .button {
+  background-color: darkblue;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: 1px solid lightblue;
+  font-size: 1.1em;
+}
+
+.content table.table {
+  border: 1px solid lightblue;
+  border-collapse: collapse;
+}
+
+.content table.table thead {
+  background-color: lightblue;
+}
+
+.content table.table td {
+  border: 1px solid lightblue;
+  padding: 3px;
+}
+
+.content .region {
+  display: flex;
+  column-gap: 10px;
+}
+
+.content .region > * {
+  padding: 3px;
+}
+
+.light {
+  color: #999;
+}
+
+.header {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.bottom {
+  margin-bottom: 20px;
+}
+
+.table input[type=text] {
+  padding: 5px;
+  margin: 2px;
+  border: 1px solid lightblue;
+  border-radius: 3px;
+  width: 100%;
+}
+
+td.contains {
+  padding: 3px 18px 3px 3px !important;
+}
+
+.right {
+  text-align: right;
+}
