@@ -1,6 +1,6 @@
 #!/bin/sh
 export NODE_OPTIONS=--openssl-legacy-provider
-cd application
+cd account
 echo before npm install
 npm install
 echo npm install proceeded successfully
