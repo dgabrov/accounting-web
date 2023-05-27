@@ -13,6 +13,7 @@ import {
 } from "../state/constants";
 import {createActionClearStore} from "../oper/action/clear-store-action";
 import {setToken} from "../service/token";
+import {logoutEffect} from "../oper/effect/logout-effect";
 
 const Header = (props: HeaderProps) => {
 
@@ -88,20 +89,14 @@ const storeToProps = (store: IStore): HeaderPropsData => {
     return {company, user}
 }
 
-const dispatch = (dispatch: Dispatch<Action<string>>) : HeaderPropsDispatch => {
+const dispatch = (dispatch: any) : HeaderPropsDispatch => {
     return {
         reports: () => {
             dispatch(createActionLocation(LOCATION_REPORTS));
         },
         logout: () => {
             // clear the contents of the store
-            dispatch(createActionClearStore());
-
-            // delete the token from the repo
-            setToken('')
-
-            // move to the login page
-            dispatch(createActionLocation(LOCATION_LOGIN));
+            dispatch(logoutEffect())
         },
         companies: () => {
             dispatch(createActionLocation(LOCATION_COMPANIES));

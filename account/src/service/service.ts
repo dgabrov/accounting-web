@@ -31,6 +31,11 @@ export const loginUser = async (data: LoginData): Promise<UserData> => {
     return userData
 }
 
+export const logoutUser = async (): Promise<void> => {
+    const payload = JSON.stringify({});
+    return await proceedFetch('/logout', payload, true, true)
+}
+
 export const getCompanies = async (): Promise<CompanyData[]> => {
     return await proceedFetch('/companies', '', false, true)
 }
