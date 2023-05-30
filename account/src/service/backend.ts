@@ -1,7 +1,7 @@
 let url : string | null = null
 
 const fetchBackend = async() : Promise<string> => {
-    const response = await fetch(window.location.href + "/config/config.json");
+    const response = await fetch(window.location.href + "config/config.json");
     const data = await response.json();
 
     if (response.status >= 400) {

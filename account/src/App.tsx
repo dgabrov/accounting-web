@@ -11,7 +11,7 @@ import {
     LOCATION_EDIT_ACCOUNT,
     LOCATION_EDIT_COMPANY,
     LOCATION_EDIT_TRANSACTION,
-    LOCATION_LOGIN,
+    LOCATION_LOGIN, LOCATION_REPORT_BALANCE,
     LOCATION_REPORTS,
     LOCATION_TRANSACTIONS
 } from "./state/constants";
@@ -30,6 +30,7 @@ import {Action} from "redux";
 import {connect} from "react-redux";
 import Reports from "./control/Reports";
 import {AllMap} from "./util/tp";
+import ReportBalance from "./control/ReportBalance";
 
 const componentMap: AllMap<JSX.Element> = {}
 componentMap[LOCATION_ACCOUNTS] = <Accounts/>;
@@ -43,6 +44,7 @@ componentMap[LOCATION_EDIT_TRANSACTION] = <EditTransaction/>;
 componentMap[LOCATION_LOGIN] = <Login />;
 componentMap[LOCATION_TRANSACTIONS] = <Transactions />;
 componentMap[LOCATION_REPORTS] = <Reports />;
+componentMap[LOCATION_REPORT_BALANCE] = <ReportBalance />;
 
 
 

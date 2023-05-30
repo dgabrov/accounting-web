@@ -7,7 +7,7 @@ import {CompanyData} from "../data/company-data";
 import {createActionEditCompany} from "../oper/action/edit-company-action";
 import {newGUID} from "../service/service";
 import {createActionLocation} from "../oper/action/location-action";
-import {LOCATION_CD_COMPANIES, LOCATION_EDIT_COMPANY} from "../state/constants";
+import {getMonth, LOCATION_CD_COMPANIES, LOCATION_EDIT_COMPANY} from "../state/constants";
 import {createActionChooseCompany} from "../oper/action/choose-company-action";
 import {createActionDeleteCompany} from "../oper/action/delete-company-action";
 import {createActionMessage} from "../oper/action/message-action";
@@ -74,14 +74,16 @@ const Companies = (props: CompaniesProps) => {
 
         const sel = selected.hasOwnProperty(companyId);
 
+        const currentMonth = getMonth(month);
         // set checked for the checkbox
+
         return (
             <tr key={companyId}>
                 <td>{index + 1}</td>
                 <td><input type="checkbox" onChange={selectCheckbox(companyId)} checked={sel}/></td>
                 <td><a href="/" onClick={triggerEdit(companyId)}>Edit</a></td>
                 <td><a href="/" onClick={triggerSelect(companyId)}>{name}</a></td>
-                <td>{month} {day}</td>
+                <td>{currentMonth} {day}</td>
             </tr>
         )
     })
