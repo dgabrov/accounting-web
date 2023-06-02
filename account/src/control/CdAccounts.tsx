@@ -12,8 +12,9 @@ const CdAccounts = (props: CdAccountsProps) => {
 
     const confirm = () => {
         const ids = props.accounts.map((account) => (account.accountId));
+        const companyId = props.companyId;
 
-        props.confirm(ids);
+        props.confirm(ids, companyId);
     }
 
     const cancel = () => {
@@ -57,6 +58,7 @@ const CdAccounts = (props: CdAccountsProps) => {
 }
 
 const storeToProps = (store: IStore) : CdAccountsPropsData => {
+    const companyId = store.company!!.id
     const accounts = store.accounts;
     const ids = store.cdAccountIds;
     const idsMap = ids.reduce((acc: IdMap, id) => {
@@ -69,13 +71,13 @@ const storeToProps = (store: IStore) : CdAccountsPropsData => {
         return idsMap.hasOwnProperty(id);
     });
 
-    return {accounts: accountList};
+    return {accounts: accountList, companyId};
 }
 
 const dispatch = (dispatch: any) : CdAccountPropsDispatch => {
     return {
-        confirm: (ids: string[]) => {
-            dispatch(deleteAccountsEffect(ids))
+        confirm: (ids: string[], companyId: string) => {
+            dispatch(deleteAccountsEffect(ids, companyId))
         },
         cancel : () => {
             dispatch(createActionLocation(LOCATION_ACCOUNTS));

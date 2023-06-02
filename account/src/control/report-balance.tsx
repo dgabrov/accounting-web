@@ -122,7 +122,7 @@ const renderTable = (companyName: string, data: TrialBalanceResponse, accountTyp
     )
 }
 
-export const renderResponse = (company: CompanyData | null, start: string, end: string, result: TrialBalanceResponse | null, accountTypeMap: {
+export const renderResponse = (company: CompanyData | null, result: TrialBalanceResponse | null, accountTypeMap: {
     [p: string]: AccountTypeData
 }): any => {
     let res = (<div></div>)

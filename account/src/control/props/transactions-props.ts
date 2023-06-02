@@ -5,6 +5,7 @@ export interface TransactionsPropsData {
     search: string;
     transactions: TransactionData[];
     companyId : string;
+    allCompanyAccounts: AccountData[];
 }
 
 export interface TransactionsPropsDispatch {

@@ -3,7 +3,7 @@ import {ReportsProps, ReportsPropsData, ReportsPropsDispatch} from "./props/repo
 import {connect} from "react-redux";
 import {IStore} from "../state/store";
 import {createActionLocation} from "../oper/action/location-action";
-import {LOCATION_REPORT_BALANCE} from "../state/constants";
+import {LOCATION_REPORT_ACCOUNT, LOCATION_REPORT_BALANCE} from "../state/constants";
 
 const Reports = (props : ReportsProps) => {
 
@@ -14,6 +14,13 @@ const Reports = (props : ReportsProps) => {
         props.trialBalance();
     }
 
+    const reportAccount = (event: any) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        props.reportAccount();
+    }
+
     const companyName = props.company?.name
 
     return(<div>
@@ -21,6 +28,7 @@ const Reports = (props : ReportsProps) => {
         <div>
             <ul>
                 <li><a href='/' onClick={trialBalance}>Trial Balance</a></li>
+                <li><a href='/' onClick={reportAccount}>Account</a></li>
             </ul>
         </div>
     </div>)
@@ -36,6 +44,9 @@ const dispatch = (dispatch: any) : ReportsPropsDispatch => {
     return {
         trialBalance(): void {
             dispatch(createActionLocation(LOCATION_REPORT_BALANCE));
+        },
+        reportAccount() : void {
+            dispatch(createActionLocation(LOCATION_REPORT_ACCOUNT));
         }
     }
 }

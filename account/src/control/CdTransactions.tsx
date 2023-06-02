@@ -10,19 +10,18 @@ import {createActionMessage} from "../oper/action/message-action";
 import {deleteTransactions} from "../service/service";
 import {createActionAfterDeleteTransactions} from "../oper/action/after-delete-transactions-action";
 import {AccountData} from "../data/account-data";
-import {getAccountMap} from "../service/acct";
 
 const CdTransactions = (props: CdTransactionProps) => {
     const startMap : AllMap<AccountData> = {}
     const [accountMap, setAccountMap] = useState(startMap);
 
-    const loadMap = async () => {
-        const crtMap = await getAccountMap();
-        setAccountMap(crtMap);
-    }
-
     useEffect(() => {
-        loadMap().then(()=>{})
+        const newMap = props.allCompanyAccounts.reduce<AllMap<AccountData>>((acc, account) => {
+            acc[account.accountId] = account;
+            return acc
+        }, {})
+
+        setAccountMap(newMap)
     }, [])
 
     const cancel = () => {
@@ -77,8 +76,9 @@ const storeToProps = (store: IStore) : CdTransactionPropsData => {
 
     const transactions = store.transactions.filter((txn) => (idMap.hasOwnProperty(txn.transactionId)));
     const companyId = store.company!!.id
+    const allCompanyAccounts = store.allCompanyAccounts
 
-    return {transactions, companyId}
+    return {transactions, companyId, allCompanyAccounts}
 }
 
 const dispatch = (dispatch: any) : CdTransactionPropsDispatch => {

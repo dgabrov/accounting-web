@@ -1,7 +1,5 @@
 import {createActionMessage} from "../action/message-action";
 import {logoutUser} from "../../service/service";
-import {createActionAfterDeleteAccounts} from "../action/after-delete-accounts-action";
-import {clearAccounts, getAllAccounts} from "../../service/acct";
 import {createActionClearStore} from "../action/clear-store-action";
 import {setToken} from "../../service/token";
 import {createActionLocation} from "../action/location-action";

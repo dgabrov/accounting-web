@@ -2,7 +2,6 @@ import {Action} from "redux";
 import {IStore} from "../../state/store";
 import {AccountData} from "../../data/account-data";
 import {TransactionData} from "../../data/transaction-data";
-import {setCompanyId} from "../../service/acct";
 
 export const ACTION_CHOOSE_COMPANY : string = "choose-company";
 
@@ -29,9 +28,6 @@ export const processActionChooseCompany = (store: IStore, action: ActionChooseCo
 
         const accounts : AccountData[] = [];
         const transactions : TransactionData[] = [];
-
-        // set the new company ID
-        setCompanyId(company.id);
 
         res = { ...store, accounts, transactions, company }
     }

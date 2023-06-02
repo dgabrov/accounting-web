@@ -6,6 +6,7 @@ export interface ReportsPropsData {
 
 export interface ReportsPropsDispatch {
     trialBalance : () => void
+    reportAccount: () => void
 }
 
 export interface ReportsProps extends ReportsPropsData, ReportsPropsDispatch {}

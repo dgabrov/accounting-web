@@ -3,12 +3,10 @@ import {TransactionsProps, TransactionsPropsData, TransactionsPropsDispatch} fro
 import {IStore} from "../state/store";
 import {connect} from "react-redux";
 import {TransactionData, TransactionPosition} from "../data/transaction-data";
-import {AccountData} from "../data/account-data";
 import {createActionCdTransactions} from "../oper/action/cd-transactions_action";
 import {txnSearchEffect} from "../oper/effect/txn-search-effect";
 import {createActionUpdateTransaction} from "../oper/action/update-transaction-action";
 import {newGUID} from "../service/service";
-import {getAllAccounts} from "../service/acct";
 import {IdMap} from "../util/tp";
 import {createActionMessage} from "../oper/action/message-action";
 import {processKeyDown} from "../util/key-operations";
@@ -23,13 +21,6 @@ const Transactions = (props: TransactionsProps) => {
         }
     }
 
-    const [accounts, setAccounts] = useState<AccountData[]>([]);
-
-    const loadData = async () => {
-        const accts = await getAllAccounts();
-        setAccounts(accts);
-    }
-
     useEffect(() => {
         if (searchField !== null && searchField.focus) {
             searchField.focus();
@@ -37,11 +28,7 @@ const Transactions = (props: TransactionsProps) => {
         }
     }, [searchField])
 
-    useEffect(() => {
-       loadData().then(() => {});
-    }, []);
-
-    const accMap = accounts.reduce((acc: IdMap, acct: AccountData) => {
+    const accMap = props.allCompanyAccounts.reduce<IdMap>((acc, acct) => {
         const id = acct.accountId;
         acc[id] = acct.code;
         return acc;
@@ -178,7 +165,8 @@ const storeToProps = (store: IStore): TransactionsPropsData => {
     return {
         search: '',
         transactions: store.transactions,
-        companyId: store.company?.id!!
+        companyId: store.company?.id!!,
+        allCompanyAccounts: store.allCompanyAccounts
     }
 }
 

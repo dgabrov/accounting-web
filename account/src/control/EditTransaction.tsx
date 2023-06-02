@@ -17,7 +17,6 @@ import {createActionLocation} from "../oper/action/location-action";
 import {LOCATION_TRANSACTIONS} from "../state/constants";
 import {createActionMessage} from "../oper/action/message-action";
 import {createActionAfterUpdateTransaction} from "../oper/action/after-update-transaction-action";
-import {getAllAccounts} from "../service/acct";
 import {parseFloat} from "../util/calcs";
 import {processKeyDown} from "../util/key-operations";
 
@@ -119,26 +118,17 @@ const EditTransaction = (props: EditTransactionProps) => {
     const [totalDebit, setTotalDebit] = useState(0.0);
     const [totalCredit, setTotalCredit] = useState(0.0);
 
-    const [allAccounts, setAllAccounts] = useState<AccountData[]>([])
-
     const doRecalc = (items: editPos[], tdebit: (val: number) => void, tcredit: (val: number) => void) => {
         const {debit, credit} = recalcValues(items, props.reportError);
         tdebit(debit);
         tcredit(credit);
     }
 
-    const loadData = async () => {
-        const accounts = await getAllAccounts();
-        setAllAccounts(accounts);
-
-        doRecalc(pos, setTotalDebit, setTotalCredit)
-    }
-
     useEffect(() => {
-        loadData().then(()=>{});
+        doRecalc(pos, setTotalDebit, setTotalCredit)
     }, [])
 
-    const accInfo = getAccountInfo(allAccounts);
+    const accInfo = getAccountInfo(props.allCompanyAccounts);
 
     const accountSelect = accInfo.list;
     const accountMap = accInfo.map;
@@ -408,6 +398,7 @@ const storeToProps = (store: IStore): EditTransactionPropsData => {
     const adding = store.addingTransaction;
     const id = store.editTransactionId;
     const companyId = store.company?.id!!;
+    const allCompanyAccounts = store.allCompanyAccounts
 
     let transaction  : TransactionData = {transactionId: id, positions: [], comments: '', sequence: 0, companyId, transactionDate: ""};
 
@@ -421,7 +412,7 @@ const storeToProps = (store: IStore): EditTransactionPropsData => {
     }
 
     return {
-        adding, transaction, companyId
+        adding, transaction, companyId, allCompanyAccounts
     };
 }
 

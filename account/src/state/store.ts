@@ -13,6 +13,7 @@ export interface IStore {
     }
     user: UserData | null;
     company: CompanyData | null;
+    allCompanyAccounts: AccountData[];
     companies: CompanyData[];
     accounts: AccountData[];
     cdCompanyIds: string[];
