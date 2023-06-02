@@ -1,12 +1,9 @@
+import {AccountValues} from "./common-data";
+
 export interface TrialBalanceRequest {
     start: string
     end: string
     companyId : string
-}
-
-export interface AccountValues {
-    debit: number
-    credit: number
 }
 
 export interface TrialBalance {

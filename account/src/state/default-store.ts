@@ -11,6 +11,7 @@ export const createEmptyStore = (): IStore => {
         },
         user: null,
         company: null,
+        allCompanyAccounts: [],
         companies: [],
         accounts: [],
         cdCompanyIds: [],

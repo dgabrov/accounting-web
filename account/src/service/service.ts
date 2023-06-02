@@ -8,6 +8,7 @@ import {TransactionData} from "../data/transaction-data";
 import {proceedFetch} from "./goFetch";
 import {setToken} from "./token";
 import {TrialBalanceRequest, TrialBalanceResponse} from "../data/trial-balance-data";
+import {AccountReportRequest, AccountReportResult} from "../data/account-report-data";
 
 let starterSequence = 0
 const SEQUENCE_DELTA = 5;
@@ -114,4 +115,9 @@ export const loadAccounts = async (companyId: string) : Promise<AccountData []> 
 export const trialBalance = async(request: TrialBalanceRequest) : Promise<TrialBalanceResponse> => {
     const url = "/trialBalanceReport"
     return await proceedFetch(url, JSON.stringify(request), true, true)
+}
+
+export const accountReport = async(request: AccountReportRequest) : Promise<AccountReportResult> => {
+    const url = "/accountReport";
+    return await proceedFetch(url, JSON.stringify(request), true, true);
 }

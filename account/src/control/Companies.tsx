@@ -12,6 +12,7 @@ import {createActionChooseCompany} from "../oper/action/choose-company-action";
 import {createActionDeleteCompany} from "../oper/action/delete-company-action";
 import {createActionMessage} from "../oper/action/message-action";
 import {IdMap} from "../util/tp";
+import {chooseCompanyEffect} from "../oper/effect/choose-company-effect";
 
 const Companies = (props: CompaniesProps) => {
 
@@ -119,7 +120,7 @@ const storeToProps = (store: IStore): CompaniesPropsData => {
     return {companies};
 }
 
-const dispatch = (dispatch: Dispatch<Action<String>>): CompaniesPropsDispatch => {
+const dispatch = (dispatch: any): CompaniesPropsDispatch => {
     return {
         edit: (id: string) => {
             dispatch(createActionEditCompany(false, id));
@@ -138,7 +139,7 @@ const dispatch = (dispatch: Dispatch<Action<String>>): CompaniesPropsDispatch =>
             }
         },
         choose: (data: CompanyData) => {
-            dispatch(createActionChooseCompany(data.id));
+            dispatch(chooseCompanyEffect(data.id));
         }
     }
 }

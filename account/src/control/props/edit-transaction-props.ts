@@ -1,9 +1,11 @@
 import {TransactionData} from "../../data/transaction-data";
+import {AccountData} from "../../data/account-data";
 
 export interface EditTransactionPropsData {
     transaction: TransactionData;
     adding: boolean;
     companyId: string;
+    allCompanyAccounts: AccountData[];
 }
 
 export interface EditTransactionPropsDispatch {

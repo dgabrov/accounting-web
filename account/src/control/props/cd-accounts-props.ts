@@ -2,10 +2,11 @@ import {AccountData} from "../../data/account-data";
 
 export interface CdAccountsPropsData {
     accounts: AccountData[]
+    companyId: string
 }
 
 export interface CdAccountPropsDispatch {
-    confirm: (ids: string[]) => void
+    confirm: (ids: string[], companyId: string) => void
     cancel: () => void
 }
 

@@ -8,3 +8,5 @@ export const getIdMap = (ids: string[]) :IdMap => {
         return acc;
     }, {});
 }
+
+export type DropDownItemType = {value: string, label: string}

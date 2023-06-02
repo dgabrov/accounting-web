@@ -14,9 +14,9 @@ const ReportBalance = (props: ReportBalanceProps) => {
     const [start, setStart] = useState('')
     const [end, setEnd] = useState('')
 
-    const [result, setResult] = useState<TrialBalanceResponse|null>(null)
+    const [result, setResult] = useState<TrialBalanceResponse | null>(null)
 
-    const startChange = (event : any) => {
+    const startChange = (event: any) => {
         setStart(event.target.value)
     }
 
@@ -24,36 +24,38 @@ const ReportBalance = (props: ReportBalanceProps) => {
         setEnd(event.target.value)
     }
 
-    const runReport = async() => {
+    const runReport = async () => {
         try {
             const companyId = props.company!!.id
-            const request:  TrialBalanceRequest = {
+            const request: TrialBalanceRequest = {
                 start, end, companyId
             }
             const res = await trialBalance(request)
             setResult(res)
-        } catch(err: any) {
+        } catch (err: any) {
             props.dispatchError(err)
         }
     }
 
-    const renderedResponse = renderResponse(props.company, start, end, result, props.accountTypeMap)
+    const renderedResponse = renderResponse(props.company, result, props.accountTypeMap)
 
-    return(<div className={'content '}>
-        <h2>Trial Balance {companyName}</h2>
-        <div className="header edit bottom" style={{width: '400px'}}>
-            Start:<input type={"text"} onChange={startChange} value={start}/>
-            End:<input type={"text"} onChange={endChange} value={end}/>
-            <button className="button" onClick={runReport}>Generate</button>
+    return (
+        <div className={'content '}>
+            <h2>Trial Balance {companyName}</h2>
+            <div className="header edit bottom" style={{width: '400px'}}>
+                Start:<input type={"text"} onChange={startChange} value={start}/>
+                End:<input type={"text"} onChange={endChange} value={end}/>
+                <button className="button" onClick={runReport}>Generate</button>
+            </div>
+
+            {renderedResponse}
         </div>
-
-        {renderedResponse}
-    </div>)
+    )
 }
 
-function storeToProps(store: IStore) : ReportBalancePropsData {
+function storeToProps(store: IStore): ReportBalancePropsData {
     const types = store.accountTypes
-    const accountMap : {[p: string] : AccountTypeData} = types.reduce((acc : {[p:string] : AccountTypeData}, val) => {
+    const accountMap: { [p: string]: AccountTypeData } = types.reduce((acc: { [p: string]: AccountTypeData }, val) => {
         acc[val.accountTypeCd] = val
         return acc
     }, {})
@@ -65,9 +67,9 @@ function storeToProps(store: IStore) : ReportBalancePropsData {
     }
 }
 
-function dispatch(dispatch: any) : ReportBalancePropsDispatch {
+function dispatch(dispatch: any): ReportBalancePropsDispatch {
     return {
-        dispatchError : (err: any) => {
+        dispatchError: (err: any) => {
             let msg = ''
 
             if (err.message) {

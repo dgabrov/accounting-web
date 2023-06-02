@@ -7,11 +7,8 @@ import AsyncSelect from "react-select/async";
 import {AccountTypeData} from "../data/account-type-data";
 import {createActionLocation} from "../oper/action/location-action";
 import {LOCATION_ACCOUNTS} from "../state/constants";
-import {createActionMessage} from "../oper/action/message-action";
-import {updateAccount} from "../service/service";
-import {createActionAfterUpdateAccount} from "../oper/action/after-update-account";
-import {clearAccounts, getAllAccounts} from "../service/acct";
 import {processKeyDown} from "../util/key-operations";
+import {createSaveAccountEffect} from "../oper/effect/save-account-effect";
 
 
 function getAccType(accountTypeCd: string, types: AccountTypeData[]) {
@@ -173,31 +170,8 @@ const dispatch = (dispatch: any): EditAccountPropsDispatch => {
             dispatch(createActionLocation(LOCATION_ACCOUNTS));
         },
         save: (data: AccountData, adding: boolean) => {
-            dispatch(save(data, adding));
+            dispatch(createSaveAccountEffect(data, adding));
         }
-    }
-}
-
-const saveEffect = async (dispatch: any, data: AccountData, adding: boolean) => {
-    try {
-        // update the account data
-        await updateAccount(adding, data);
-
-        // refresh the accounts loaded in cache
-        clearAccounts();
-        await getAllAccounts();
-
-        // now with this, process after update account
-        dispatch(createActionAfterUpdateAccount(adding, data));
-    } catch (err: any) {
-        dispatch(createActionMessage(true, true, err.message));
-    }
-}
-
-const save = (data: AccountData, adding: boolean) => {
-    return (dispatch: any) => {
-        saveEffect(dispatch, data, adding).then(() => {
-        })
     }
 }
 
