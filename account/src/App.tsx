@@ -11,7 +11,7 @@ import {
     LOCATION_EDIT_ACCOUNT,
     LOCATION_EDIT_COMPANY,
     LOCATION_EDIT_TRANSACTION,
-    LOCATION_LOGIN, LOCATION_REPORT_ACCOUNT, LOCATION_REPORT_BALANCE,
+    LOCATION_LOGIN, LOCATION_REPORT_ACCOUNT, LOCATION_REPORT_BALANCE, LOCATION_REPORT_TRANSACTION,
     LOCATION_REPORTS,
     LOCATION_TRANSACTIONS
 } from "./state/constants";
@@ -32,6 +32,7 @@ import Reports from "./control/Reports";
 import {AllMap} from "./util/tp";
 import ReportBalance from "./control/ReportBalance";
 import ReportAccount from "./control/ReportAccount";
+import ReportTransaction from "./control/ReportTransaction";
 
 const componentMap: AllMap<JSX.Element> = {}
 componentMap[LOCATION_ACCOUNTS] = <Accounts/>;
@@ -47,6 +48,7 @@ componentMap[LOCATION_TRANSACTIONS] = <Transactions />;
 componentMap[LOCATION_REPORTS] = <Reports />;
 componentMap[LOCATION_REPORT_BALANCE] = <ReportBalance />;
 componentMap[LOCATION_REPORT_ACCOUNT] = <ReportAccount />;
+componentMap[LOCATION_REPORT_TRANSACTION] = <ReportTransaction />;
 
 
 

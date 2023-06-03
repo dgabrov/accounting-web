@@ -1,8 +1,10 @@
 import {AccountData} from "../../data/account-data";
+import {AccountTypeData} from "../../data/account-type-data";
 
 export interface ReportAccountPropsData {
     companyName : string
     accounts: AccountData[]
+    accountTypes: AccountTypeData[]
 }
 
 export interface ReportAccountPropsDispatch {

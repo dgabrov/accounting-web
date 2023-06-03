@@ -3,12 +3,13 @@ import {ReportAccountProps, ReportAccountPropsData, ReportAccountPropsDispatch} 
 import {IStore} from "../state/store";
 import {connect} from "react-redux";
 import AsyncSelect from "react-select/async";
-import {DropDownItemType} from "../util/tp";
+import {AllMap, DropDownItemType} from "../util/tp";
 import {SingleValue} from "react-select";
 import {accountReport} from "../service/service";
 import {AccountReportRequest, AccountReportResult} from "../data/account-report-data";
 import {createActionMessage} from "../oper/action/message-action";
 import {renderAccountReport} from "./report-account-aux";
+import {AccountTypeData} from "../data/account-type-data";
 
 const ReportAccount = (props: ReportAccountProps) => {
 
@@ -17,6 +18,7 @@ const ReportAccount = (props: ReportAccountProps) => {
     const [defaultOptions, setDefaultOptions] = useState<DropDownItemType[]>([]);
     const [selectedAccountId, setSelectedAccountId] = useState<DropDownItemType>({value: '', label: ''});
     const [result, setResult] = useState<AccountReportResult | null>(null)
+    const [accountTypeMap, setAccountTypeMap] = useState<AllMap<AccountTypeData>>({})
 
     useEffect(() => {
         const newDefaultOptions = props.accounts.map((account) => {
@@ -27,7 +29,15 @@ const ReportAccount = (props: ReportAccountProps) => {
         })
 
         setDefaultOptions(newDefaultOptions);
-    }, [props.accounts])
+
+        // account type map
+        const newMap = props.accountTypes.reduce<AllMap<AccountTypeData>>((acc, current) => {
+            acc[current.accountTypeCd] = current;
+            return acc;
+        }, {})
+        setAccountTypeMap(newMap)
+
+    }, [props.accounts, props.accountTypes])
 
 
     const runReport = async () => {
@@ -76,7 +86,9 @@ const ReportAccount = (props: ReportAccountProps) => {
         return result;
     }
 
-    const renderedResponse = renderAccountReport(result);
+    const renderedResponse = renderAccountReport(result, accountTypeMap);
+
+    // get account type
 
     return (
         <div className={'content'}>
@@ -103,7 +115,8 @@ const ReportAccount = (props: ReportAccountProps) => {
 const storeToProps = (store: IStore): ReportAccountPropsData => {
     return {
         accounts: store.allCompanyAccounts,
-        companyName: store.company!!.name
+        companyName: store.company!!.name,
+        accountTypes: store.accountTypes
     }
 }
 
