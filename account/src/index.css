@@ -217,3 +217,21 @@ td.right {
 .total {
   font-weight: bold;
 }
+
+.noItemsRow {
+  color: gray;
+  font-style: italic;
+}
+
+.comments {
+  max-width: 300px;
+  white-space: normal;
+}
+
+.even {
+  background: #eaeaea;
+}
+
+.odd {
+  background: #ffffff;
+}

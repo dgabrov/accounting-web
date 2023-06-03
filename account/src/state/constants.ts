@@ -11,6 +11,7 @@ export const LOCATION_TRANSACTIONS: string = 'transactions';
 export const LOCATION_REPORTS: string = 'reports';
 export const LOCATION_REPORT_BALANCE : string = 'report_balance';
 export const LOCATION_REPORT_ACCOUNT : string = 'report_account';
+export const LOCATION_REPORT_TRANSACTION: string = 'report_transaction';
 
 const MONTHS : {[p:number] : string} = {
     1: "January",
