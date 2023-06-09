@@ -1,14 +1,12 @@
-import React, {Dispatch, useState} from 'react';
+import React, {useState} from 'react';
 import {CompaniesProps, CompaniesPropsData, CompaniesPropsDispatch} from "./props/companies-props";
 import {IStore} from "../state/store";
-import {Action} from "redux";
 import {connect} from "react-redux";
 import {CompanyData} from "../data/company-data";
 import {createActionEditCompany} from "../oper/action/edit-company-action";
 import {newGUID} from "../service/service";
 import {createActionLocation} from "../oper/action/location-action";
 import {getMonth, LOCATION_CD_COMPANIES, LOCATION_EDIT_COMPANY} from "../state/constants";
-import {createActionChooseCompany} from "../oper/action/choose-company-action";
 import {createActionDeleteCompany} from "../oper/action/delete-company-action";
 import {createActionMessage} from "../oper/action/message-action";
 import {IdMap} from "../util/tp";

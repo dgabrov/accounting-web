@@ -150,7 +150,7 @@ const getDetailRows = (transactions: TransactionData[], accountMap: AllMap<Accou
         );
     } else {
         transactions.forEach((txn, index) => {
-            const even = index % 2 == 0
+            const even = index % 2 === 0
             const items = getDetailRowItem(txn, accountMap, even);
 
             r.push(...items);

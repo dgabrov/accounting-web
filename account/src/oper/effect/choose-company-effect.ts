@@ -1,6 +1,5 @@
 import {createActionMessage} from "../action/message-action";
-import {deleteCompanies, loadAccounts} from "../../service/service";
-import {createActionAfterDeleteCompanies} from "../action/after-delete-companies-action";
+import {loadAccounts} from "../../service/service";
 import {createActionChooseCompany} from "../action/choose-company-action";
 import {createActionAllCompanyAccounts} from "../action/all-company-accounts-action";
 

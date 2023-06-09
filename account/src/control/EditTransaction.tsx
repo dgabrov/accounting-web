@@ -126,6 +126,7 @@ const EditTransaction = (props: EditTransactionProps) => {
 
     useEffect(() => {
         doRecalc(pos, setTotalDebit, setTotalCredit)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const accInfo = getAccountInfo(props.allCompanyAccounts);

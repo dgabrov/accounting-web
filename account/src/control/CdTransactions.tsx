@@ -22,7 +22,7 @@ const CdTransactions = (props: CdTransactionProps) => {
         }, {})
 
         setAccountMap(newMap)
-    }, [])
+    }, [props.allCompanyAccounts])
 
     const cancel = () => {
         props.cancel();
