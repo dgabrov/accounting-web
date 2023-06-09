@@ -70,10 +70,6 @@ const EditCompany = (props: EditCompanyProps) => {
                     <div className="edit">
                         <input type="text" value={name} onChange={changeValue("name")} ref={updateNameField} onKeyDown={processKeyDown(save, cancel, false)}/>
                     </div>
-                    <div className="edit">
-                        <button className="button" onClick={save}>Save</button>
-                        <button className="button" onClick={cancel}>Cancel</button>
-                    </div>
                 </div>
                 <div className="item">
                     <div className="edit">End Month</div>
@@ -82,6 +78,12 @@ const EditCompany = (props: EditCompanyProps) => {
                 <div className="item">
                     <div className="edit">End Day</div>
                     <div className="edit"><input type="text" value={endDay} onChange={changeValue("day")} onKeyDown={processKeyDown(save, cancel, false)}/></div>
+                </div>
+            </div>
+            <div className="region">
+                <div className="edit">
+                    <button className="button" onClick={save}>Save</button>
+                    <button className="button" onClick={cancel}>Cancel</button>
                 </div>
             </div>
         </div>);
