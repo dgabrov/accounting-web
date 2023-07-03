@@ -5,7 +5,7 @@ import {CompanyData} from "../data/company-data";
 import {AccountData} from "../data/account-data";
 import {AccountTypeData} from "../data/account-type-data";
 import {TransactionData} from "../data/transaction-data";
-import {proceedFetch} from "./goFetch";
+import {proceedBlob, proceedFetch} from "./goFetch";
 import {setToken} from "./token";
 import {TrialBalanceRequest, TrialBalanceResponse} from "../data/trial-balance-data";
 import {
@@ -14,6 +14,7 @@ import {
     TransactionReportRequest,
     TransactionReportResult
 } from "../data/account-report-data";
+import {ExcelReportData} from "../data/excel-report-data";
 
 let starterSequence = 0
 const SEQUENCE_DELTA = 5;
@@ -130,4 +131,9 @@ export const accountReport = async(request: AccountReportRequest) : Promise<Acco
 export const transactionReport = async(request: TransactionReportRequest): Promise<TransactionReportResult> => {
     const url = "/transactionReport";
     return await proceedFetch(url, JSON.stringify(request), true, true);
+}
+
+export const excelReport = async(request: ExcelReportData): Promise<any> => {
+    const url = '/excelReport';
+    return await proceedBlob(url, JSON.stringify(request), true, true);
 }

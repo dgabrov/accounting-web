@@ -12,6 +12,7 @@ export const LOCATION_REPORTS: string = 'reports';
 export const LOCATION_REPORT_BALANCE : string = 'report_balance';
 export const LOCATION_REPORT_ACCOUNT : string = 'report_account';
 export const LOCATION_REPORT_TRANSACTION: string = 'report_transaction';
+export const LOCATION_REPORT_EXCEL: string = 'report_excel';
 
 const MONTHS : {[p:number] : string} = {
     1: "January",

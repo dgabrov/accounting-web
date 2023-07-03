@@ -3,7 +3,12 @@ import {ReportsProps, ReportsPropsData, ReportsPropsDispatch} from "./props/repo
 import {connect} from "react-redux";
 import {IStore} from "../state/store";
 import {createActionLocation} from "../oper/action/location-action";
-import {LOCATION_REPORT_ACCOUNT, LOCATION_REPORT_BALANCE, LOCATION_REPORT_TRANSACTION} from "../state/constants";
+import {
+    LOCATION_REPORT_ACCOUNT,
+    LOCATION_REPORT_BALANCE,
+    LOCATION_REPORT_EXCEL,
+    LOCATION_REPORT_TRANSACTION
+} from "../state/constants";
 
 const Reports = (props: ReportsProps) => {
 
@@ -28,6 +33,13 @@ const Reports = (props: ReportsProps) => {
         props.reportTransaction();
     }
 
+    const excelSpreadsheet = (event: any) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        props.reportExcel();
+    }
+
     const companyName = props.company?.name
 
     return (<div className={'center'}>
@@ -36,6 +48,7 @@ const Reports = (props: ReportsProps) => {
             <div className={'center'}><a href='/' onClick={trialBalance}>Trial Balance</a></div>
             <div className={'center'}><a href='/' onClick={reportAccount}>Account</a></div>
             <div className={'center'}><a href='/' onClick={reportTransaction}>Transactions</a></div>
+            <div className={'center'}><a href='/' onClick={excelSpreadsheet}>Excel Spreadsheet</a></div>
         </div>
     </div>)
 }
@@ -56,6 +69,9 @@ const dispatch = (dispatch: any): ReportsPropsDispatch => {
         },
         reportTransaction: (): void => {
             dispatch(createActionLocation(LOCATION_REPORT_TRANSACTION));
+        },
+        reportExcel: () : void => {
+            dispatch(createActionLocation(LOCATION_REPORT_EXCEL));
         }
     }
 }

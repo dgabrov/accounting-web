@@ -1,5 +1,6 @@
 import {getBackend} from "./backend";
 import {getToken} from "./token";
+import {Blob} from "buffer";
 
 export const proceedFetch = async (url: string, body: string|undefined, isPost: boolean, addToken: boolean): Promise<any> => {
     const backend = await getBackend()
@@ -12,6 +13,21 @@ export const proceedFetch = async (url: string, body: string|undefined, isPost: 
     }
 
     return data;
+}
+
+export const proceedBlob = async (url: string, body: string|undefined, isPost: boolean, addToken: boolean): Promise<any> => {
+    const backend = await getBackend()
+    const fullUrl = `${backend}${url}`
+    const response = await fetch(fullUrl, buildConfig(isPost, addToken, body));
+    const fileName = response.headers.get('Content-Disposition')
+
+    if (response.status >= 400) {
+        throw "error";
+    }
+    const blob = response.blob()
+
+    // it is a promise anyway
+    return {blob, fileName};
 }
 
 const buildConfig = (post: boolean, addToken: boolean, body: string|undefined) : RequestInit => {
