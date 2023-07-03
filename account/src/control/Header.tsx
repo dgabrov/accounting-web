@@ -1,18 +1,9 @@
-import React, {Dispatch} from "react";
+import React from "react";
 import {HeaderProps, HeaderPropsData, HeaderPropsDispatch} from "./props/header-props";
 import {IStore} from "../state/store";
-import {Action} from "redux";
 import {connect} from "react-redux";
 import {createActionLocation} from "../oper/action/location-action";
-import {
-    LOCATION_ACCOUNTS,
-    LOCATION_COMPANIES,
-    LOCATION_LOGIN,
-    LOCATION_REPORTS,
-    LOCATION_TRANSACTIONS
-} from "../state/constants";
-import {createActionClearStore} from "../oper/action/clear-store-action";
-import {setToken} from "../service/token";
+import {LOCATION_ACCOUNTS, LOCATION_COMPANIES, LOCATION_REPORTS, LOCATION_TRANSACTIONS} from "../state/constants";
 import {logoutEffect} from "../oper/effect/logout-effect";
 
 const Header = (props: HeaderProps) => {

@@ -55,11 +55,45 @@ const excelReportEffect = (start: string, end: string, companyId: string) => {
     return async (dispatch: any) => {
         try {
             const {blob, fileName} = await excelReport({start, end, companyId})
-            alert(fileName)
+            download(blob, fileName);
         } catch(err: any) {
             dispatch(createActionMessage(true, true, err.message));
         }
     }
 }
+
+const download = (blob : Blob, name: string) => {
+    const a: HTMLAnchorElement = document.createElement('a');
+    a.style.display = 'none';
+    document.body.appendChild(a);
+
+    const url: string = window.URL.createObjectURL(blob);
+
+    a.href = url;
+    a.download = name;
+
+    a.click();
+
+    window.URL.revokeObjectURL(url);
+    a.parentElement?.removeChild(a);
+}
+
+/*
+const download = async ({filename, blob}: {filename: string; blob: Blob}) => {
+  const a: HTMLAnchorElement = document.createElement('a');
+  a.style.display = 'none';
+  document.body.appendChild(a);
+
+  const url: string = window.URL.createObjectURL(blob);
+
+  a.href = url;
+  a.download = `${filename}.md`;
+
+  a.click();
+
+  window.URL.revokeObjectURL(url);
+  a.parentElement?.removeChild(a);
+};
+ */
 
 export default connect(storeToProps, dispatch)(ReportExcel);

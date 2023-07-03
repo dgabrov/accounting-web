@@ -19,12 +19,15 @@ export const proceedBlob = async (url: string, body: string|undefined, isPost: b
     const backend = await getBackend()
     const fullUrl = `${backend}${url}`
     const response = await fetch(fullUrl, buildConfig(isPost, addToken, body));
-    const fileName = response.headers.get('Content-Disposition')
+
+    let fileNameHeader = response.headers.get('Content-Disposition')
+    fileNameHeader = fileNameHeader == null ? '' : fileNameHeader;
+    const fileName = getFileName(fileNameHeader);
 
     if (response.status >= 400) {
         throw "error";
     }
-    const blob = response.blob()
+    const blob = await response.blob()
 
     // it is a promise anyway
     return {blob, fileName};
@@ -49,4 +52,11 @@ const buildConfig = (post: boolean, addToken: boolean, body: string|undefined) :
     }
 
     return res;
+}
+
+function getFileName(fileNameHeader: string) {
+    let fileName = fileNameHeader.replace(/[^=]*=(.*)/, '$1');
+    fileName = fileName.replace(/:+/g, '')
+    alert(fileName)
+    return fileName
 }
