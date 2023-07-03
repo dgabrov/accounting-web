@@ -57,6 +57,5 @@ const buildConfig = (post: boolean, addToken: boolean, body: string|undefined) :
 function getFileName(fileNameHeader: string) {
     let fileName = fileNameHeader.replace(/[^=]*=(.*)/, '$1');
     fileName = fileName.replace(/:+/g, '')
-    alert(fileName)
     return fileName
 }
