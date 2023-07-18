@@ -1,6 +1,5 @@
 import {getBackend} from "./backend";
 import {getToken} from "./token";
-import {Blob} from "buffer";
 
 export const proceedFetch = async (url: string, body: string|undefined, isPost: boolean, addToken: boolean): Promise<any> => {
     const backend = await getBackend()
@@ -25,7 +24,7 @@ export const proceedBlob = async (url: string, body: string|undefined, isPost: b
     const fileName = getFileName(fileNameHeader);
 
     if (response.status >= 400) {
-        throw "error";
+        throw new Error("error");
     }
     const blob = await response.blob()
 
