@@ -9,6 +9,7 @@ import {createEmptyStore} from "./state/default-store";
 import thunk from "redux-thunk";
 import reducer from "./state/reducer";
 import {Provider} from "react-redux";
+import {VERSION} from "./util/constants";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,6 +17,7 @@ const root = ReactDOM.createRoot(
 
 
 const initialStore: PreloadedState<IStore> = createEmptyStore();
+console.log(VERSION);
 
 const store = createStore(reducer, initialStore, applyMiddleware(thunk));
 
