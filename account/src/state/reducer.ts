@@ -35,6 +35,7 @@ import {ACTION_TXN_SEARCH, processActionTxnSearch} from "../oper/action/txn-sear
 import {ACTION_UPDATE_TRANSACTION, processActionUpdateTransaction} from "../oper/action/update-transaction-action";
 import {ACTION_ACCOUNT_TYPES, processActionAccountTypes} from "../oper/action/action-account-types";
 import {ACTION_ALL_COMPANY_ACCOUNTS, processActionAllCompanyAccounts} from "../oper/action/all-company-accounts-action";
+import {ACTION_TRIM, processActionTrim} from "../oper/action/trim";
 
 const map: {[key: string]: (store: IStore, action: any) => IStore } = {}
 
@@ -60,6 +61,7 @@ map[ACTION_TXN_SEARCH] = processActionTxnSearch;
 map[ACTION_UPDATE_TRANSACTION] = processActionUpdateTransaction;
 map[ACTION_ACCOUNT_TYPES] = processActionAccountTypes;
 map[ACTION_ALL_COMPANY_ACCOUNTS] = processActionAllCompanyAccounts;
+map[ACTION_TRIM] = processActionTrim;
 
 const emptyReducer = (store: IStore | undefined, action: Action<string>): IStore => {
     console.log(`cannot find reducer for the action with the type: ${action.type}`);

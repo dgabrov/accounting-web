@@ -10,6 +10,7 @@ import {newGUID} from "../service/service";
 import {IdMap} from "../util/tp";
 import {createActionMessage} from "../oper/action/message-action";
 import {processKeyDown} from "../util/key-operations";
+import {createActionTrim} from "../oper/action/trim";
 
 const Transactions = (props: TransactionsProps) => {
 
@@ -57,6 +58,10 @@ const Transactions = (props: TransactionsProps) => {
 
     const triggerSearch = () => {
         props.doSearch(props.companyId, search);
+    }
+
+    const triggerTrim = () => {
+        props.trim();
     }
 
     const add = () => {
@@ -132,6 +137,7 @@ const Transactions = (props: TransactionsProps) => {
                         />
 
                 <button className="button" onClick={triggerSearch}>Search</button>
+                <button className="button" onClick={triggerTrim}>Trim</button>
             </div>
             <div style={{fontSize: '0.8em'}}>Sample: [date: (date1-date2)] [accounts:(code1, code2)] comment1, comment2</div>
             <div style={{fontSize: '0.8em'}}>parantheses are mandatory when using construct for date and accounts</div>
@@ -190,6 +196,9 @@ const dispatch = (dispatch: any): TransactionsPropsDispatch => {
         },
         doSearch: (companyId: string, search: string) => {
             dispatch(txnSearchEffect(companyId, search));
+        },
+        trim :() => {
+            dispatch(createActionTrim());
         }
     }
 }

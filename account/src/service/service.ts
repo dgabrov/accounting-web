@@ -108,7 +108,10 @@ export const searchTransactions = async (companyId: string, search: string) : Pr
     const strPayload = JSON.stringify(payload)
 
     const val = await proceedFetch("/searchTransactions", strPayload, true, true)
-    return val.transactions
+
+    // sometimes this is null so ensure this will not become null after search
+    let resultTransactions = val.transactions;
+    return resultTransactions == null ? [] : resultTransactions;
 }
 
 export const loadAccounts = async (companyId: string) : Promise<AccountData []> => {

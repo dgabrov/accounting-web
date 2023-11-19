@@ -13,6 +13,7 @@ export interface TransactionsPropsDispatch {
     delete: (ids: string[]) => void;
     edit: (data: TransactionData) => void;
     doSearch: (companyId: string, src: string) => void;
+    trim: () => void;
 }
 
 export interface TransactionsProps extends TransactionsPropsData, TransactionsPropsDispatch {}
