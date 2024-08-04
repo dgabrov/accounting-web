@@ -7,7 +7,6 @@ import AsyncSelect from "react-select/async";
 import {AccountTypeData} from "../data/account-type-data";
 import {createActionLocation} from "../oper/action/location-action";
 import {LOCATION_ACCOUNTS} from "../state/constants";
-import {processKeyDown} from "../util/key-operations";
 import {createSaveAccountEffect} from "../oper/effect/save-account-effect";
 
 
@@ -120,22 +119,20 @@ const EditAccount = (props: EditAccountProps) => {
                         />
                     </div>
                     <div className="edit">
-                        <button className="button" onClick={save}>Save</button>
-                        <button className="button" onClick={cancel}>Cancel</button>
+                        <button className="button ok" onClick={save}>Save</button>
+                        <button className="button cancel" onClick={cancel}>Cancel</button>
                     </div>
                 </div>
                 <div className="item">
                     <div className="edit">Code</div>
                     <div className="edit">
-                        <input type="text" value={code} onChange={fieldChange('code')}
-                               onKeyDown={processKeyDown(save, cancel, false)}/>
+                        <input type="text" value={code} onChange={fieldChange('code')} />
                     </div>
                 </div>
                 <div className="item">
                     <div className="edit">Name</div>
                     <div className="edit">
-                        <input type="text" value={name} onChange={fieldChange('name')}
-                               onKeyDown={processKeyDown(save, cancel, false)}/>
+                        <input type="text" value={name} onChange={fieldChange('name')} />
                     </div>
                 </div>
             </div>

@@ -3,7 +3,6 @@ import {LoginProps, LoginPropsData, LoginPropsDispatch} from "./props/login-prop
 import {IStore} from "../state/store";
 import {connect} from "react-redux";
 import {loginEffect} from "../oper/effect/login-effect";
-import {processKeyDown} from "../util/key-operations";
 
 const Login = (props: LoginProps) => {
 
@@ -40,11 +39,11 @@ const Login = (props: LoginProps) => {
     return (
         <div className="content">
             <div className="edit">Login</div>
-            <div className="edit"><input type="text" value={login} onChange={loginChange} ref={updateLoginField} onKeyDown={processKeyDown(triggerLogin, null, false)}/></div>
+            <div className="edit"><input type="text" value={login} onChange={loginChange} ref={updateLoginField} /></div>
             <div className="edit">Password</div>
-            <div className="edit"><input type="password" value={password} onChange={passwordChange} onKeyDown={processKeyDown(triggerLogin, null, false)}/></div>
+            <div className="edit"><input type="password" value={password} onChange={passwordChange} /></div>
             <div className="edit">
-                <button className="button" onClick={triggerLogin}>Proceed</button>
+                <button className="button ok" onClick={triggerLogin}>Proceed</button>
             </div>
         </div>
 );

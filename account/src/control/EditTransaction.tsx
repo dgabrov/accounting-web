@@ -18,7 +18,6 @@ import {LOCATION_TRANSACTIONS} from "../state/constants";
 import {createActionMessage} from "../oper/action/message-action";
 import {createActionAfterUpdateTransaction} from "../oper/action/after-update-transaction-action";
 import {parseFloat} from "../util/calcs";
-import {processKeyDown} from "../util/key-operations";
 
 interface editPos {
     id: string;
@@ -335,11 +334,9 @@ const EditTransaction = (props: EditTransactionProps) => {
                     />
                 </td>
                 <td className={'contains'}><CurrencyInput value={p.debit} style={{textAlign: 'right'}} decimalScale={2}
-                                                          onValueChange={currencyChange(id, true)}
-                                                          onKeyDown={processKeyDown(save, props.cancel, false)}/></td>
+                                                          onValueChange={currencyChange(id, true)}/></td>
                 <td className={'contains'}><CurrencyInput value={p.credit} style={{textAlign: 'right'}}
-                                                          decimalScale={2} onValueChange={currencyChange(id, false)}
-                                                          onKeyDown={processKeyDown(save, props.cancel, false)}/>
+                                                          decimalScale={2} onValueChange={currencyChange(id, false)}/>
                 </td>
                 <td><a href="/" onClick={doDelete(p.id)}>Delete</a></td>
                 <td><a href="/" onClick={doBalance(p.id)}>Balance</a></td>
@@ -355,14 +352,14 @@ const EditTransaction = (props: EditTransactionProps) => {
                 <div className="item">
                     <div className="edit">Date</div>
                     <div className="edit">
-                        <input type="text" value={crtDate} onChange={(ev : any) => (setCrtDate(ev.target.value))} ref={updateDateField} onKeyDown={processKeyDown(save, props.cancel, false)}/>
+                        <input type="text" value={crtDate} onChange={(ev : any) => (setCrtDate(ev.target.value))} ref={updateDateField}/>
                     </div>
                 </div>
                 <div className="item">
                     <div className="edit">Comments</div>
                     <div className="edit"><input type="text" value={comments} onChange={(evt: any) => {
                         setComments(evt.target.value)
-                    }}  onKeyDown={processKeyDown(save, props.cancel, false)}/></div>
+                    }}/></div>
                 </div>
             </div>
             <table className="table bottom">
@@ -388,8 +385,8 @@ const EditTransaction = (props: EditTransactionProps) => {
                 </tbody>
             </table>
             <div className="edit">
-                <button className="button" onClick={save}>Save</button>
-                <button className="button" onClick={props.cancel}>Cancel</button>
+                <button className="button ok" onClick={save}>Save</button>
+                <button className="button cancel" onClick={props.cancel}>Cancel</button>
             </div>
         </div>
     );

@@ -31,7 +31,7 @@ const ReportExcel = (props: ReportExcelProps) => {
             <div className="header edit bottom" style={{width: '400px'}}>
                 Start:<input type={"text"} onChange={startChange} value={start}/>
                 End:<input type={"text"} onChange={endChange} value={end}/>
-                <button className="button" onClick={runReport}>Generate</button>
+                <button className="button ok" onClick={runReport}>Generate</button>
             </div>
         </div>
     )

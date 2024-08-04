@@ -9,7 +9,6 @@ import {createActionMessage} from "../oper/action/message-action";
 import {newGUID} from "../service/service";
 import {updateAccountEffect} from "../oper/effect/update-account-effect";
 import {IdMap} from "../util/tp";
-import {processKeyDown} from "../util/key-operations";
 
 const Accounts = (props: AccountsProps) => {
 
@@ -108,8 +107,8 @@ const Accounts = (props: AccountsProps) => {
             <h1>Accounts</h1>
             <div className="header edit bottom">
                 Search:
-                <input type="text" value={search} onChange={changeSearch} ref={updateSearchField} onKeyDown={processKeyDown(doSearch, null, false)}/>
-                <button className="button" onClick={doSearch}>Search</button>
+                <input type="text" value={search} onChange={changeSearch} ref={updateSearchField}/>
+                <button className="button ok" onClick={doSearch}>Search</button>
             </div>
             <table className="table">
                 <thead>

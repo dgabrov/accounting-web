@@ -9,7 +9,6 @@ import {createActionUpdateTransaction} from "../oper/action/update-transaction-a
 import {newGUID} from "../service/service";
 import {IdMap} from "../util/tp";
 import {createActionMessage} from "../oper/action/message-action";
-import {processKeyDown} from "../util/key-operations";
 import {createActionTrim} from "../oper/action/trim";
 
 const Transactions = (props: TransactionsProps) => {
@@ -132,11 +131,9 @@ const Transactions = (props: TransactionsProps) => {
                 Search: <input type="text"
                                value={search}
                                onChange={(e) => {setSearch(e.target.value)}}
-                               ref={updateSearchField}
-                               onKeyDown={processKeyDown(triggerSearch, null, false)}
-                        />
+                               ref={updateSearchField} />
 
-                <button className="button" onClick={triggerSearch}>Search</button>
+                <button className="button ok" onClick={triggerSearch}>Search</button>
                 <button className="button" onClick={triggerTrim}>Trim</button>
             </div>
             <div style={{fontSize: '0.8em'}}>Sample: [date: (date1-date2)] [accounts:(code1, code2)] comment1, comment2</div>

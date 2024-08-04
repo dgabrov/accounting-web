@@ -64,7 +64,7 @@ const CdTransactions = (props: CdTransactionProps) => {
             </table>
             <div className="edit">
                 <button className="button" onClick={confirm}>Delete</button>
-                <button className="button" onClick={cancel}>Cancel</button>
+                <button className="button cancel" onClick={cancel}>Cancel</button>
             </div>
         </div>
     );

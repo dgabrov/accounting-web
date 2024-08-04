@@ -104,7 +104,7 @@ const ReportAccount = (props: ReportAccountProps) => {
                     defaultOptions={defaultOptions}
                     className={'minimumWidth'} />
 
-                    <button className="button" onClick={runReport}>Generate</button>
+                    <button className="button ok" onClick={runReport}>Generate</button>
             </div>
 
             {renderedResponse}

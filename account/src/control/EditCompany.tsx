@@ -6,7 +6,6 @@ import {CompanyData} from "../data/company-data";
 import {createActionLocation} from "../oper/action/location-action";
 import {LOCATION_COMPANIES} from "../state/constants";
 import {editCompanyEffect} from "../oper/effect/edit-company-effect";
-import {processKeyDown} from "../util/key-operations";
 
 const EditCompany = (props: EditCompanyProps) => {
 
@@ -68,22 +67,22 @@ const EditCompany = (props: EditCompanyProps) => {
                 <div className="item">
                     <div className="edit">Name</div>
                     <div className="edit">
-                        <input type="text" value={name} onChange={changeValue("name")} ref={updateNameField} onKeyDown={processKeyDown(save, cancel, false)}/>
+                        <input type="text" value={name} onChange={changeValue("name")} ref={updateNameField} />
                     </div>
                 </div>
                 <div className="item">
                     <div className="edit">End Month</div>
-                    <div className="edit"><input type="text" value={endMonth} onChange={changeValue("month")} onKeyDown={processKeyDown(save, cancel, false)}/></div>
+                    <div className="edit"><input type="text" value={endMonth} onChange={changeValue("month")} /></div>
                 </div>
                 <div className="item">
                     <div className="edit">End Day</div>
-                    <div className="edit"><input type="text" value={endDay} onChange={changeValue("day")} onKeyDown={processKeyDown(save, cancel, false)}/></div>
+                    <div className="edit"><input type="text" value={endDay} onChange={changeValue("day")} /></div>
                 </div>
             </div>
             <div className="region">
                 <div className="edit">
-                    <button className="button" onClick={save}>Save</button>
-                    <button className="button" onClick={cancel}>Cancel</button>
+                    <button className="button ok" onClick={save}>Save</button>
+                    <button className="button cancel" onClick={cancel}>Cancel</button>
                 </div>
             </div>
         </div>);

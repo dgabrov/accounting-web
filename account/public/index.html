@@ -40,3 +40,37 @@
     -->
   </body>
 </html>
+<script>
+  const processSubmit = (event) => {
+    const currentTarget = event.currentTarget
+    const target = event.target
+    const is13 = event.keyCode === 13
+    const is27 = event.keyCode === 27
+    const isTextArea = target.tagName === "TEXTAREA"
+    const isControlPressed = event.ctrlKey === true
+
+    let buttonClassName = ""
+    if (is13 === true) {
+      buttonClassName = "ok"
+    } else if (is27 === true) {
+      buttonClassName = "cancel"
+    }
+
+    // either you push escape or enter; in case of enter, all is good
+    // except if you are inside a text area and you did not keep ctrl pressed
+    // in which case you need to be allowed to continue editing not exiting submitting
+    // the form
+    if (is27 || (is13 && (isControlPressed || !isTextArea))) {
+      const arr = currentTarget.getElementsByClassName(buttonClassName)
+      if (arr?.length > 0) {
+        const item = arr[0]
+
+        if (item?.click) {
+          item.click()
+        }
+      }
+    }
+  }
+
+  document.body.addEventListener("keydown", processSubmit)
+</script>
