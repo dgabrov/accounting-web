@@ -96,11 +96,19 @@ export const deleteTransactions = async(ids: string[]) => {
     await proceedFetch('/deleteTransactions', strPayload, true, true)
 }
 
-export const updateTransaction = async(adding: boolean, transaction: TransactionData) =>{
+export const updateTransaction = async(adding: boolean, transaction: TransactionData) : Promise<TransactionData|null>  => {
     const payload = {adding, transaction}
     const strPayload = JSON.stringify(payload)
 
-    await proceedFetch("/updateTransaction", strPayload, true, true)
+    const res = await proceedFetch("/updateTransaction", strPayload, true, true)
+
+    let info : TransactionData|null = null
+
+    if (res?.success === true) {
+        info = res?.transaction;
+    }
+
+    return info;
 }
 
 export const searchTransactions = async (companyId: string, search: string) : Promise<TransactionData[]> => {

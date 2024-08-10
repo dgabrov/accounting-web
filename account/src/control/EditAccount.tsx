@@ -116,25 +116,35 @@ const EditAccount = (props: EditAccountProps) => {
                             value={accountType}
                             defaultOptions={displayTypeCd}
                             ref={updateTypeDrop}
+                            onKeyDown={(event) => {
+                                if (!event.ctrlKey) {
+                                    event.stopPropagation();
+                                }
+                            }}
                         />
-                    </div>
-                    <div className="edit">
-                        <button className="button ok" onClick={save}>Save</button>
-                        <button className="button cancel" onClick={cancel}>Cancel</button>
                     </div>
                 </div>
                 <div className="item">
                     <div className="edit">Code</div>
                     <div className="edit">
-                        <input type="text" value={code} onChange={fieldChange('code')} />
+                        <input type="text" value={code} onChange={fieldChange('code')}/>
                     </div>
                 </div>
                 <div className="item">
                     <div className="edit">Name</div>
                     <div className="edit">
-                        <input type="text" value={name} onChange={fieldChange('name')} />
+                        <input type="text" value={name} onChange={fieldChange('name')}/>
                     </div>
                 </div>
+            </div>
+            <div className="region">
+                <div className="item">
+                    <div className="edit">
+                        <button className="button ok" onClick={save}>Save</button>
+                        <button className="button cancel" onClick={cancel}>Cancel</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     );
