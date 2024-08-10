@@ -116,8 +116,8 @@ const Transactions = (props: TransactionsProps) => {
                     <td><a href="/" onClick={edit(txn)}>Edit</a></td>
                     <td>{strDate}</td>
                     <td>{comments}</td>
-                    <td>{debitAccounts}</td>
-                    <td>{creditAccounts}</td>
+                    <td className={'center'}>{debitAccounts}</td>
+                    <td className={'center'}>{creditAccounts}</td>
                     <td style={{textAlign: 'right'}}>{formattedTotal}</td>
                 </tr>
             );

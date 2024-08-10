@@ -323,6 +323,11 @@ const EditTransaction = (props: EditTransactionProps) => {
                         value={currentValue}
                         defaultOptions={accountSelect}
                         onChange={accountChanged(id)}
+                        onKeyDown={(event) => {
+                            if (!event.ctrlKey) {
+                                event.stopPropagation();
+                            }
+                        }}
                         styles={{
                             control: (baseStyles, state) => {
                                 return {
@@ -433,10 +438,10 @@ const dispatch = (dispatch: any): EditTransactionPropsDispatch => {
 const saveEffect = async (dispatch: any, adding: boolean, data: TransactionData) => {
     try {
         // save the transaction
-        await updateTransaction(adding, data);
+        const returnedTxn = await updateTransaction(adding, data);
 
         // then dispatch something to update the transaction in the provided list
-        dispatch(createActionAfterUpdateTransaction(adding, data));
+        dispatch(createActionAfterUpdateTransaction(adding, returnedTxn!!));
     } catch(err: any){
         dispatch(createActionMessage(true, true, err.message));
     }
