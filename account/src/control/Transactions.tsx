@@ -10,16 +10,31 @@ import {newGUID} from "../service/service";
 import {IdMap} from "../util/tp";
 import {createActionMessage} from "../oper/action/message-action";
 import {createActionTrim} from "../oper/action/trim";
+import {TransactionsFormData} from "../data/form-data";
+import {createActionUpdateTransactionsForm} from "../oper/action/update-transactions-form";
 
 const Transactions = (props: TransactionsProps) => {
 
     let searchField : any|null = null
+
+    const searchBlur = (event: any) => {
+        const currentText = event?.target?.value;
+
+        if (currentText !== undefined) {
+            props.updateFormData({search: currentText})
+        }
+    }
 
     const updateSearchField = (newField : any|null) => {
         if (searchField === null && newField !== null) {
             searchField = newField
         }
     }
+
+    useEffect(() => {
+        setSearch(props.transactionsForm.search)
+    }, [props.transactionsForm.search]);
+
 
     useEffect(() => {
         if (searchField !== null && searchField.focus) {
@@ -131,6 +146,7 @@ const Transactions = (props: TransactionsProps) => {
                 Search: <input type="text"
                                value={search}
                                onChange={(e) => {setSearch(e.target.value)}}
+                               onBlur={searchBlur}
                                ref={updateSearchField} />
 
                 <button className="button ok" onClick={triggerSearch}>Search</button>
@@ -169,7 +185,8 @@ const storeToProps = (store: IStore): TransactionsPropsData => {
         search: '',
         transactions: store.transactions,
         companyId: store.company?.id!!,
-        allCompanyAccounts: store.allCompanyAccounts
+        allCompanyAccounts: store.allCompanyAccounts,
+        transactionsForm: store.transactionsForm
     }
 }
 
@@ -196,6 +213,9 @@ const dispatch = (dispatch: any): TransactionsPropsDispatch => {
         },
         trim :() => {
             dispatch(createActionTrim());
+        },
+        updateFormData : (data: TransactionsFormData)=> {
+            dispatch(createActionUpdateTransactionsForm(data))
         }
     }
 }

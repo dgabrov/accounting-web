@@ -36,6 +36,14 @@ import {ACTION_UPDATE_TRANSACTION, processActionUpdateTransaction} from "../oper
 import {ACTION_ACCOUNT_TYPES, processActionAccountTypes} from "../oper/action/action-account-types";
 import {ACTION_ALL_COMPANY_ACCOUNTS, processActionAllCompanyAccounts} from "../oper/action/all-company-accounts-action";
 import {ACTION_TRIM, processActionTrim} from "../oper/action/trim";
+import {
+    ACTION_UPDATE_TRANSACTIONS_FORM,
+    processActionUpdateTransactionForm
+} from "../oper/action/update-transactions-form";
+import {
+    ACTION_REPORT_TRANSACTION_FORM,
+    processActionReportTransactionForm
+} from "../oper/action/report-transaction-form-action";
 
 const map: {[key: string]: (store: IStore, action: any) => IStore } = {}
 
@@ -62,6 +70,8 @@ map[ACTION_UPDATE_TRANSACTION] = processActionUpdateTransaction;
 map[ACTION_ACCOUNT_TYPES] = processActionAccountTypes;
 map[ACTION_ALL_COMPANY_ACCOUNTS] = processActionAllCompanyAccounts;
 map[ACTION_TRIM] = processActionTrim;
+map[ACTION_UPDATE_TRANSACTIONS_FORM] = processActionUpdateTransactionForm;
+map[ACTION_REPORT_TRANSACTION_FORM] = processActionReportTransactionForm;
 
 const emptyReducer = (store: IStore | undefined, action: Action<string>): IStore => {
     console.log(`cannot find reducer for the action with the type: ${action.type}`);

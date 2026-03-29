@@ -12,6 +12,7 @@ import {TransactionReportRequest, TransactionReportResult} from "../data/account
 import {TransactionData} from "../data/transaction-data";
 import {AllMap} from "../util/tp";
 import {AccountData} from "../data/account-data";
+import {createActionReportTransactionForm} from "../oper/action/report-transaction-form-action";
 
 const ReportTransaction = (props: ReportTransactionProps) => {
 
@@ -19,6 +20,13 @@ const ReportTransaction = (props: ReportTransactionProps) => {
     const [end, setEnd] = useState<string>('');
     const [result, setResult] = useState<TransactionReportResult | null>(null);
     const [accountMap, setAccountMap] = useState<AllMap<AccountData>>({})
+
+    const frm = props.form;
+
+    useEffect(() => {
+        setStart(frm.start);
+        setEnd(frm.end);
+    }, [frm])
 
     // populate the account map
     useEffect(() => {
@@ -58,12 +66,18 @@ const ReportTransaction = (props: ReportTransactionProps) => {
 
     const renderedResponse = renderResponse(companyName, result, accountMap);
 
+    const startEndBlur = (event : any) => {
+        props.updateForm({
+            start, end
+        })
+    }
+
     return (
         <div className={'content '}>
             <h2>Transaction Report {companyName}</h2>
             <div className="header edit bottom" style={{width: '400px'}}>
-                Start:<input type={"text"} onChange={startChange} value={start}/>
-                End:<input type={"text"} onChange={endChange} value={end}/>
+                Start:<input type={"text"} onChange={startChange} value={start} onBlur={startEndBlur}/>
+                End:<input type={"text"} onChange={endChange} value={end} onBlur={startEndBlur}/>
                 <button className="button ok" onClick={runReport}>Generate</button>
             </div>
 
@@ -75,10 +89,16 @@ const ReportTransaction = (props: ReportTransactionProps) => {
 }
 
 const storeToProps = (store: IStore): ReportTransactionPropsData => {
+    const formData = store.reportTransactionForm;
+
     return {
         accountTypes: store.accountTypes,
         allCompanyAcounts: store.allCompanyAccounts,
-        company: store.company!!
+        company: store.company!!,
+        form: {
+            start: formData.start,
+            end: formData.end
+        }
     }
 }
 
@@ -87,6 +107,8 @@ const dispatch = (dispatch: any): ReportTransactionPropsDispatch => {
         triggerError: (err: any) => {
             const message = err.message ? err.message : '' + err
             dispatch(createActionMessage(true, true, message));
+        }, updateForm: (data)=> {
+            dispatch(createActionReportTransactionForm(data));
         }
     }
 }

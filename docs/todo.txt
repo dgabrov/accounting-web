@@ -4,6 +4,17 @@ Accounts.tsx
 ReportAccount.tsx
 ReportBalance.tsx
 ReportExcel.tsx
-Reports.tsx
-ReportTransaction.tsx
-Transactions.tsx
+done not needed Reports.tsx
+done ReportTransaction.tsx
+done Transactions.tsx
+
+
+- populate the form data
+- populate store.ts
+- populate initialize empty store.ts
+- add form data to props
+- add function to props to dispatch
+- add action
+- add reducer and code them
+- then add the reducer to the map
+- implement function to props to dispatch

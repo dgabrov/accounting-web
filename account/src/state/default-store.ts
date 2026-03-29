@@ -26,7 +26,13 @@ export const createEmptyStore = (): IStore => {
 
         editTransactionId: '',
         addingTransaction:  true,
-        accountTypes: []
+        accountTypes: [],
+        transactionsForm: {
+            search: ''
+        }, reportTransactionForm: {
+            start: '',
+            end: ''
+        }
     }
 }
 

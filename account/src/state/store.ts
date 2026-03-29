@@ -3,6 +3,7 @@ import {CompanyData} from "../data/company-data";
 import {AccountData} from "../data/account-data";
 import {TransactionData} from "../data/transaction-data";
 import {AccountTypeData} from "../data/account-type-data";
+import {ReportTransactionFormData, TransactionsFormData} from "../data/form-data";
 
 export interface IStore {
     location: string;
@@ -27,5 +28,8 @@ export interface IStore {
     editTransactionId: string;
     addingTransaction: boolean;
     accountTypes: AccountTypeData[];
+
+    transactionsForm: TransactionsFormData;
+    reportTransactionForm: ReportTransactionFormData;
 }
 
