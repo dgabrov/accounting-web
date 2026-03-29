@@ -1,0 +1,9 @@
+The following components need to have dates persisted in the application store as follows:
+
+Accounts.tsx
+ReportAccount.tsx
+ReportBalance.tsx
+ReportExcel.tsx
+Reports.tsx
+ReportTransaction.tsx
+Transactions.tsx
