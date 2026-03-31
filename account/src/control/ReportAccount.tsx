@@ -10,6 +10,8 @@ import {AccountReportRequest, AccountReportResult} from "../data/account-report-
 import {createActionMessage} from "../oper/action/message-action";
 import {renderAccountReport} from "./report-account-aux";
 import {AccountTypeData} from "../data/account-type-data";
+import {createActionUpdateReportAccount} from "../oper/action/update-report-account-form";
+import {ReportAccountFormData} from "../data/form-data";
 
 const ReportAccount = (props: ReportAccountProps) => {
 
@@ -38,6 +40,12 @@ const ReportAccount = (props: ReportAccountProps) => {
         setAccountTypeMap(newMap)
 
     }, [props.accounts, props.accountTypes])
+
+    useEffect(() => {
+        setStart(props.form.start)
+        setEnd(props.form.end)
+        setSelectedAccountId(props.form.selectedAccountId)
+    }, [props.form]);
 
 
     const runReport = async () => {
@@ -89,20 +97,23 @@ const ReportAccount = (props: ReportAccountProps) => {
     const renderedResponse = renderAccountReport(result, accountTypeMap);
 
     // get account type
+    const onBlur = (event: any) => {
+        props.updateFormData({start,  end, selectedAccountId})
+    }
 
     return (
         <div className={'content'}>
             <h2 className={'header'}>Report Account {props.companyName}</h2>
             <div className="header edit bottom nowrap">
-                    Start:<input type={"text"} onChange={startChange} value={start} style={{maxWidth: '100px'}}/>
-                    End:<input type={"text"} onChange={endChange} value={end} style={{maxWidth: '100px'}}/>
+                    Start:<input type={"text"} onChange={startChange} value={start} style={{maxWidth: '100px'}} onBlur={onBlur}/>
+                    End:<input type={"text"} onChange={endChange} value={end} style={{maxWidth: '100px'}} onBlur={onBlur}/>
                     Account: <AsyncSelect
                     loadOptions={filterAccounts}
                     onChange={selectType}
                     isClearable={true}
                     value={selectedAccountId}
                     defaultOptions={defaultOptions}
-                    className={'minimumWidth'} />
+                    className={'minimumWidth'} onBlur={onBlur}/>
 
                     <button className="button ok" onClick={runReport}>Generate</button>
             </div>
@@ -116,7 +127,8 @@ const storeToProps = (store: IStore): ReportAccountPropsData => {
     return {
         accounts: store.allCompanyAccounts,
         companyName: store.company!!.name,
-        accountTypes: store.accountTypes
+        accountTypes: store.accountTypes,
+        form: store.reportAccountForm
     }
 }
 
@@ -124,6 +136,8 @@ const dispatch = (dispatch: any): ReportAccountPropsDispatch => {
     return {
         dispatchError: (err: any) => {
             dispatch(createActionMessage(true, true, err.message));
+        }, updateFormData: (form: ReportAccountFormData) => {
+            dispatch(createActionUpdateReportAccount(form))
         }
     }
 }

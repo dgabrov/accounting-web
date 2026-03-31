@@ -1,9 +1,13 @@
+import {DropDownItemType} from "../util/tp";
+
 export interface AccountsFormData {
     search: string
 }
 
 export interface ReportAccountFormData {
-
+    start: string
+    end: string
+    selectedAccountId: DropDownItemType
 }
 
 export interface ReportBalanceFormData {

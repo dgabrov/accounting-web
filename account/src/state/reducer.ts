@@ -53,6 +53,10 @@ import {
     processActionUpdateReportBalanceForm
 } from "../oper/action/update-report-balance-form";
 import {ACTION_UPDATE_ACCOUNTS_FORM, processActionUpdateAccountsForm} from "../oper/action/update-accounts-form";
+import {
+    ACTION_UPDATE_REPORT_ACCOUNT_FORM,
+    processActionUpdateReportAccountForm
+} from "../oper/action/update-report-account-form";
 
 const map: {[key: string]: (store: IStore, action: any) => IStore } = {}
 
@@ -84,6 +88,7 @@ map[ACTION_REPORT_TRANSACTION_FORM] = processActionReportTransactionForm;
 map[ACTION_UPDATE_REPORT_EXCEL_FORMS] = processActionUpdateReportExcelForms;
 map[ACTION_UPDATE_REPORT_BALANCE_FORM] = processActionUpdateReportBalanceForm;
 map[ACTION_UPDATE_ACCOUNTS_FORM] = processActionUpdateAccountsForm;
+map[ACTION_UPDATE_REPORT_ACCOUNT_FORM] = processActionUpdateReportAccountForm;
 
 
 const emptyReducer = (store: IStore | undefined, action: Action<string>): IStore => {

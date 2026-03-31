@@ -4,7 +4,7 @@ import {AccountData} from "../data/account-data";
 import {TransactionData} from "../data/transaction-data";
 import {AccountTypeData} from "../data/account-type-data";
 import {
-    AccountsFormData,
+    AccountsFormData, ReportAccountFormData,
     ReportBalanceFormData,
     ReportExcelFormData,
     ReportTransactionFormData,
@@ -40,5 +40,6 @@ export interface IStore {
     reportExcelForm: ReportExcelFormData;
     reportBalanceForm: ReportBalanceFormData;
     accountsForm: AccountsFormData;
+    reportAccountForm: ReportAccountFormData;
 }
 

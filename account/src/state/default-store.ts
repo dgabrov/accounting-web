@@ -41,6 +41,9 @@ export const createEmptyStore = (): IStore => {
         },
         accountsForm: {
             search: ''
+        }, reportAccountForm: {
+            start: '', end: '',
+            selectedAccountId: {value : '', label:''}
         }
     }
 }

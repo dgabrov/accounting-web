@@ -1,7 +1,7 @@
 The following components need to have dates persisted in the application store as follows:
 
-pending Accounts.tsx
 ReportAccount.tsx
+done Accounts.tsx
 done ReportBalance.tsx
 done ReportExcel.tsx
 done not needed Reports.tsx
