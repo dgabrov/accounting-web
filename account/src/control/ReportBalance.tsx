@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ReportBalanceProps, ReportBalancePropsData, ReportBalancePropsDispatch} from "./props/report-balance-props";
 import {connect} from "react-redux";
 import {IStore} from "../state/store";
@@ -7,12 +7,18 @@ import {trialBalance} from "../service/service";
 import {TrialBalanceRequest, TrialBalanceResponse} from "../data/trial-balance-data";
 import {renderResponse} from "./report-balance";
 import {AccountTypeData} from "../data/account-type-data";
+import {createActionUpdateReportBalanceForm} from "../oper/action/update-report-balance-form";
 
 
 const ReportBalance = (props: ReportBalanceProps) => {
     const companyName = props.company?.name
     const [start, setStart] = useState('')
     const [end, setEnd] = useState('')
+
+    useEffect(()=>{
+        setStart(props.form.start)
+        setEnd(props.form.end)
+    }, [props.form.start, props.form.end])
 
     const [result, setResult] = useState<TrialBalanceResponse | null>(null)
 
@@ -39,12 +45,17 @@ const ReportBalance = (props: ReportBalanceProps) => {
 
     const renderedResponse = renderResponse(props.company, result, props.accountTypeMap)
 
+    const formBlur = (event: any) => {
+        props.updateFormData(start, end)
+    }
+
     return (
         <div className={'content '}>
             <h2>Trial Balance {companyName}</h2>
             <div className="header edit bottom" style={{width: '400px'}}>
-                Start:<input type={"text"} onChange={startChange} value={start}/>
-                End:<input type={"text"} onChange={endChange} value={end}/>
+                Start:<input type={"text"} onChange={startChange} value={start} onBlur={formBlur}/>
+                End:<input type={"text"} onChange={endChange} value={end} onBlur={formBlur}/>
+
                 <button className="button ok" onClick={runReport}>Generate</button>
             </div>
 
@@ -63,7 +74,8 @@ function storeToProps(store: IStore): ReportBalancePropsData {
 
     return {
         company: store.company,
-        accountTypeMap: accountMap
+        accountTypeMap: accountMap,
+        form: store.reportBalanceForm
     }
 }
 
@@ -79,6 +91,9 @@ function dispatch(dispatch: any): ReportBalancePropsDispatch {
             }
 
             dispatch(createActionMessage(true, true, msg));
+        },
+        updateFormData: (start: string, end: string)=> {
+            dispatch(createActionUpdateReportBalanceForm({start, end}))
         }
     }
 }

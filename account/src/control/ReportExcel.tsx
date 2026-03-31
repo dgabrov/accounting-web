@@ -1,14 +1,21 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ReportExcelProps, ReportExcelPropsData, ReportExcelPropsDispatch} from "./props/report-excel-props";
 import {IStore} from "../state/store";
 import {connect} from "react-redux";
 import {excelReport} from "../service/service";
 import {createActionMessage} from "../oper/action/message-action";
+import {createUpdateReportExcelFormsAction} from "../oper/action/update-report-excel-forms";
 
 const ReportExcel = (props: ReportExcelProps) => {
     const [start, setStart] = useState<string>('')
     const [end, setEnd] = useState<string>('')
     const companyName = props.company.name;
+
+
+    useEffect(() => {
+        setStart(props.form.start)
+        setEnd(props.form.end)
+    }, [props.form.start, props.form.end])
 
     const startChange = (event: any) => {
         const val = event.target.value;
@@ -24,13 +31,18 @@ const ReportExcel = (props: ReportExcelProps) => {
         props.triggerReport(start, end, props.company.id);
     }
 
+    const blurForm = (event: any) => {
+        props.updateFormData(start, end)
+    }
+
 
     return (
         <div className={'content'}>
             <h2>Excel Sheet {companyName}</h2>
             <div className="header edit bottom" style={{width: '400px'}}>
-                Start:<input type={"text"} onChange={startChange} value={start}/>
-                End:<input type={"text"} onChange={endChange} value={end}/>
+                Start:<input type={"text"} onChange={startChange} value={start} onBlur={blurForm}/>
+                End:<input type={"text"} onChange={endChange} value={end} onBlur={blurForm}/>
+
                 <button className="button ok" onClick={runReport}>Generate</button>
             </div>
         </div>
@@ -38,8 +50,17 @@ const ReportExcel = (props: ReportExcelProps) => {
 }
 
 const storeToProps = (store: IStore) : ReportExcelPropsData => {
+    let reportExcelForm = store.reportExcelForm;
+
+    let start = reportExcelForm.start;
+    let end = reportExcelForm.end;
+
     return {
-        company: store.company!!
+        company: store.company!!,
+        form: {
+            start,
+            end
+        }
     }
 }
 
@@ -47,6 +68,11 @@ const dispatch = (dispatch: any) : ReportExcelPropsDispatch => {
     return {
         triggerReport: (start: string, end: string, companyId: string) => {
             dispatch(excelReportEffect(start, end, companyId))
+        },
+        updateFormData: (start: string, end: string) => {
+            let form = {start, end};
+
+            dispatch(createUpdateReportExcelFormsAction(form))
         }
     }
 }

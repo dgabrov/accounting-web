@@ -21,12 +21,11 @@ const ReportTransaction = (props: ReportTransactionProps) => {
     const [result, setResult] = useState<TransactionReportResult | null>(null);
     const [accountMap, setAccountMap] = useState<AllMap<AccountData>>({})
 
-    const frm = props.form;
 
     useEffect(() => {
-        setStart(frm.start);
-        setEnd(frm.end);
-    }, [frm])
+        setStart(props.form.start);
+        setEnd(props.form.end);
+    }, [props.form.start, props.form.end])
 
     // populate the account map
     useEffect(() => {

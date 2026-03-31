@@ -5,7 +5,7 @@ export const createEmptyStore = (): IStore => {
     return {
         location: LOCATION_LOGIN,
         message: {
-            visible : false,
+            visible: false,
             error: false,
             message: ''
         },
@@ -25,13 +25,22 @@ export const createEmptyStore = (): IStore => {
         addingAccount: true,
 
         editTransactionId: '',
-        addingTransaction:  true,
+        addingTransaction: true,
         accountTypes: [],
         transactionsForm: {
             search: ''
         }, reportTransactionForm: {
             start: '',
             end: ''
+        }, reportExcelForm: {
+            start: '',
+            end: ''
+        }, reportBalanceForm: {
+            start: '',
+            end: ''
+        },
+        accountsForm: {
+            search: ''
         }
     }
 }

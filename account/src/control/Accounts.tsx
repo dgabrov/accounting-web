@@ -9,6 +9,7 @@ import {createActionMessage} from "../oper/action/message-action";
 import {newGUID} from "../service/service";
 import {updateAccountEffect} from "../oper/effect/update-account-effect";
 import {IdMap} from "../util/tp";
+import {createActionUpdateAccountsForm} from "../oper/action/update-accounts-form";
 
 const Accounts = (props: AccountsProps) => {
 
@@ -29,9 +30,12 @@ const Accounts = (props: AccountsProps) => {
         if (searchField !== null && searchField.focus) {
             searchField.focus();
             searchField.select();
-
         }
     }, [searchField])
+
+    useEffect(() => {
+        setSearch(props.form.search);
+    }, [props.form.search])
 
     const sel: IdMap = {}
 
@@ -102,12 +106,16 @@ const Accounts = (props: AccountsProps) => {
         props.delete(ids);
     }
 
+    const searchBlur = (event: any) => {
+        props.updateForm(search)
+    }
+
     return (
         <div className="content">
             <h1>Accounts</h1>
             <div className="header edit bottom">
                 Search:
-                <input type="text" value={search} onChange={changeSearch} ref={updateSearchField}/>
+                <input type="text" value={search} onChange={changeSearch} ref={updateSearchField} onBlur={searchBlur}/>
                 <button className="button ok" onClick={doSearch}>Search</button>
             </div>
             <table className="table">
@@ -137,8 +145,9 @@ const storeToProps = (store: IStore): AccountsPropsData => {
     const accounts = store.accounts;
     const companyId = '' + store.company?.id
     const accountTypes = store.accountTypes;
+    const form = store.accountsForm;
 
-    return {accounts, companyId, accountTypes};
+    return {accounts, companyId, accountTypes, form};
 }
 
 const dispatch = (dispatch: any): AccountsPropsDispatch => {
@@ -159,6 +168,8 @@ const dispatch = (dispatch: any): AccountsPropsDispatch => {
         },
         doSearch: (companyId: string ,search: string) => {
             dispatch(searchAccountsEffect(companyId, search));
+        }, updateForm: (search: string) => {
+            dispatch(createActionUpdateAccountsForm({search}))
         }
     }
 }
